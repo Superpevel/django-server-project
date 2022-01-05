@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['51.250.6.54','127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['51.250.6.54','127.0.0.1','http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz']
+CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz']
 # Application definition
 
 INSTALLED_APPS = [
