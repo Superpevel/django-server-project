@@ -12,9 +12,12 @@ from selenium.webdriver.firefox.options import Options
 import json
 import time
 from .serializers.films import FilmSerializer
+import logging
+
 options = Options()
 options.headless = True
 
+logger = logging.getLogger(__name__)
 
 class Index(APIView):
 
@@ -55,6 +58,7 @@ class GetFilmUrl(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
+        logger.info("lol!!")
         request_list = json.loads(request.body)
 
         id = int(request_list.get('id'))
@@ -79,7 +83,7 @@ class GetFilmUrl(APIView):
             a2 = str(a1[0]) + "/720.mp4"
 
         except Exception as e:
-            print(e)
+            logger.info(e)
             print('Error')
 
         driver.quit()
