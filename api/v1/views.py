@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from selenium.webdriver.chrome import service
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import authentication, permissions
@@ -15,9 +16,28 @@ from .serializers.films import FilmSerializer
 import logging
 from settings.settings import BASE_DIR
 import os
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from dotenv import load_dotenv
 
-op = webdriver.ChromeOptions()
-op.add_argument('headless')
+def get_driver():
+    load_dotenv()
+    server = os.getenv('SERVER')
+    print(server)
+    if server == 'True':
+        s = Service(ChromeDriverManager().install())
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
+        chrome_options.add_argument('--no-sandbox')
+        driver = webdriver.Chrome(service=s,options=chrome_options)
+    else:
+        op = webdriver.ChromeOptions()
+        op.add_argument('headless')
+        logger.info("HAHAHA")
+        driver = webdriver.Chrome(options=op)
+
+    return driver
+
 
 logger = logging.getLogger(__name__)
 
@@ -64,9 +84,8 @@ class GetFilmUrl(APIView):
         request_list = json.loads(request.body)
 
         id = int(request_list.get('id'))
-
+        driver = get_driver()
         film = Film.objects.get(id=id)
-        driver = webdriver.Chrome(options=op)
 
         try:
             print(film.link)

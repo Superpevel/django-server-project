@@ -10,3 +10,5 @@ beautifulsoup4==4.10.0
 requests==2.27.0
 lxml==4.7.1
 selenium==4.1.0
+webdriver-manager
+python-dotenv==0.19.2
