@@ -9,7 +9,6 @@ from libs.get_films import get_film
 from core.models import Film
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
 import json
 import time
 from .serializers.films import FilmSerializer
@@ -19,13 +18,14 @@ import os
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import load_dotenv
+from selenium.webdriver.chrome.options import Options 
 
 def get_driver():
     load_dotenv()
     server = os.getenv('SERVER')
     print(server)
     if server == 'True':
-        s = Service(ChromeDriverManager().install())
+        s=Service(ChromeDriverManager().install())
         chrome_options = Options()
         chrome_options.add_argument("--headless")
         chrome_options.add_argument('--no-sandbox')
