@@ -16,8 +16,8 @@ import logging
 from settings.settings import BASE_DIR
 import os
 
-options = Options()
-options.headless = True
+op = webdriver.ChromeOptions()
+op.add_argument('headless')
 
 logger = logging.getLogger(__name__)
 
@@ -66,7 +66,7 @@ class GetFilmUrl(APIView):
         id = int(request_list.get('id'))
 
         film = Film.objects.get(id=id)
-        driver = webdriver.Firefox(options=options,log_path=os.path.join(BASE_DIR, 'logs/gec.log'))
+        driver = webdriver.Chrome(options=op)
 
         try:
             print(film.link)
