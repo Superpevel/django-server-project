@@ -13,6 +13,8 @@ import json
 import time
 from .serializers.films import FilmSerializer
 import logging
+from settings.settings import BASE_DIR
+import os
 
 options = Options()
 options.headless = True
@@ -64,7 +66,7 @@ class GetFilmUrl(APIView):
         id = int(request_list.get('id'))
 
         film = Film.objects.get(id=id)
-        driver = webdriver.Firefox(options=options)
+        driver = webdriver.Firefox(options=options,log_path=os.path.join(BASE_DIR, 'logs/gec.log'))
 
         try:
             print(film.link)
