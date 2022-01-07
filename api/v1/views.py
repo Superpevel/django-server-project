@@ -63,7 +63,7 @@ class GetFilmUrl(APIView):
 
         id = int(request_list.get('id'))
 
-        film = Film.objects.get(id=57)
+        film = Film.objects.get(id=id)
         driver = webdriver.Firefox(options=options)
 
         try:
