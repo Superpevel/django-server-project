@@ -79,7 +79,7 @@ def get_film():
 
         url = "http://ac-online.lordfilms-s.art/filmy/page/" + str(x) + "/"
 
-        if x == 3:
+        if x == 1000:
             print('hello')
             return (0)
 
