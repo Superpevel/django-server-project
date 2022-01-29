@@ -357,6 +357,7 @@ settings/local_settings.py
 .vscode/
 /media/
 
+.env/
 
 /daemons/*
 /dockerfiles/pgdata/*

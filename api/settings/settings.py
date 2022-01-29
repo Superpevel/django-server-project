@@ -28,7 +28,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['51.250.6.54','127.0.0.1']
 
-CELERY_BROKER='pyamqp://127.0.0.1//'
+CELERY_BROKER= 'amqp://superpevel:jonin123@localhost:5672/'
 CELERY_QUEUES = (
     Queue('high', Exchange('high'), routing_key='high'),
     Queue('normal', Exchange('normal'), routing_key='normal'),

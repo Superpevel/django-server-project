@@ -11,9 +11,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'settings.local_settings')
 
 from django.conf import settings
 
-app = Celery('core', include=[
+app = Celery('core',broker='amqp://superpevel:jonin123@localhost:5672/', include=[
     'core.tasks',
-    'core.tasks.test_task',
+    'core.tasks.test_task'
 ])
 
 app.config_from_object('django.conf:settings')
