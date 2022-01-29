@@ -12,3 +12,5 @@ lxml==4.7.1
 selenium==4.1.0
 webdriver-manager
 python-dotenv==0.19.2
+celery==5.2.3
+kombu

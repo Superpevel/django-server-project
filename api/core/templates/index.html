@@ -2,12 +2,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Minimal Resume Template</title>
+	<title>Sorrytd Main</title>
 	<link rel="stylesheet" type="text/css" href="/styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700');
+.button-9 {
+  appearance: button;
+  backface-visibility: hidden;
+  background-color: #405cf5;
+  border-radius: 6px;
+  border-width: 0;
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: -apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif;
+  font-size: 100%;
+  height: 44px;
+  line-height: 1.15;
+  margin: 12px 0 0;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transform: translateZ(0);
+  transition: all .2s,box-shadow .08s ease-in;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+}
 
+.button-9:disabled {
+  cursor: default;
+}
+
+.button-9:focus {
+  box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset, rgba(50, 50, 93, .2) 0 6px 15px 0, rgba(0, 0, 0, .1) 0 2px 2px 0, rgba(50, 151, 211, .3) 0 0 0 4px;
+}
 
 
 /* Reset Styles */
@@ -460,6 +495,7 @@ li .description {
 
 /* End of all :P*/
     </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -505,31 +541,17 @@ li .description {
 				</div>
 			</div>
     
-			<div class="list-card">
-				<span class="exp">~ 1 year</span>
-				<div>
-					<h3>Linux</h3>
-					<span>Scripting, Servers management and protocols, Automation</span>
-				</div>
-			</div>
-
 		</div>
 		<div class="sections">
 				<h2 class="section-title">Interests</h2>
 				
 				<div class="list-card">
 					<div>
-						<h3>Scripting languages</h3>
-						<span>PHP, JS, Bash, Python</span>
+						<h3>Mobile Dev</h3>
+						<span>Kotlin</span>
 					</div>
 				</div>	
 
-				<div class="list-card">
-					<div>
-						<h3>Hacking</h3>
-						<span>Linux, Crawlers, Bots, Network</span>
-					</div>
-				</div>		
 		</div>
 	</div>
 
@@ -539,52 +561,52 @@ li .description {
 		
 		<div class="card">
 			<div class="skill-level">
-				<span>+</span>
-				<h2>60</h2>
+				<span></span>
+				<h2>API</h2>
 			</div>
 
 			<div class="skill-meta">
-				<h3>Projects</h3>
-				<span>Adapting and creating solutions for customer's needs</span>
+				<h3>DRF, FastAPI</h3>
+				<span></span>
 			</div>
 		</div>
 
 			
 		<div class="card">
 			<div class="skill-level">
-				<h2>50</h2>
-				<span>%</span>
+				<h2>Web</h2>
+				<span></span>
 			</div>
 
 			<div class="skill-meta">
-				<h3>Web</h3>
-				<span>Applications development integrating third-party services and mobile client(s)</span>
+				<h3></h3>
+				<span>HTML,CSS,JS</span>
 			</div>
 		</div>
 
 			
 		<div class="card">
 			<div class="skill-level">
-				<h2>30</h2>
-				<span>%</span>
+				<h2>Linux</h2>
+				<span></span>
 			</div>
 
 			<div class="skill-meta">
-				<h3>Technical solutions</h3>
-				<span>Such as web services, scripts, configurations</span>
+				<h3>    confident terminal user</h3>
+				<span></span>
 			</div>
 		</div>
 
 
 		<div class="card">
 			<div class="skill-level">
-				<h2>20</h2>
-				<span>%</span>
+				<h2>Other</h2>
+				<span></span>
 			</div>
 
 			<div class="skill-meta">
-				<h3>Leading</h3>
-				<span>Web projects and ensure the quality of delivery</span>
+				<h3>Git,Postgres,SQL</h3>
+				<span></span>
 			</div>
 		</div>
 
@@ -629,8 +651,30 @@ li .description {
 		<div class="hero">
 			<h1 class="lead">Code examples</h1>
 		</div>
+		<h1 class="lead">1. Send simple ajax to backend and return hello + name </h1>
+		<input type="text" name="example_1" class="" style="width:50%;height: 50px;" id="example_1">
+		<div class="hero">
+			<button class="button-9" role="button" type="button" id="back_end" style="margin-top: 5px">AJAX_TEST</button>
+		</div>	
+		<h1 class="lead">Result:</h1>
+		<h4 class="lead"><div id="result_back"></div></h1>
 	</div>
-
-
 </body>
+<script>
+ $('#back_end').click(function (e) {
+            e.preventDefault();
+			var obj = {'name': $('#example_1').val()};
+			obj['csrfmiddlewaretoken'] ='{{ csrf_token }}';
+			$.ajax({
+                    url: '{% url "back_end" %}',
+                    type: 'POST',
+                    data: obj
+                }).done(function(response) {
+					$("#result_back").text(response);
+                }).fail(function() {
+					alert("FAILED")
+                });
+        })
+
+</script>
 </html>

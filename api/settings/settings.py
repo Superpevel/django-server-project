@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-
+from kombu import Queue, Exchange
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,6 +27,22 @@ SECRET_KEY = 'django-insecure-ag5(t^hc(a$!i9eagcc&^8a^fn!&ps_1-g!_d%4x=20ug1!o$l
 DEBUG = False
 
 ALLOWED_HOSTS = ['51.250.6.54','127.0.0.1']
+
+CELERY_BROKER='pyamqp://127.0.0.1//'
+CELERY_QUEUES = (
+    Queue('high', Exchange('high'), routing_key='high'),
+    Queue('normal', Exchange('normal'), routing_key='normal'),
+    Queue('low', Exchange('low'), routing_key='low'),
+)
+CELERY_DEFAULT_QUEUE = 'normal'
+CELERY_DEFAULT_EXCHANGE = 'normal'
+CELERY_DEFAULT_ROUTING_KEY = 'normal'
+CELERY_ROUTES = {
+    # -- HIGH PRIORITY QUEUE -- #
+    'core.tasks.test_task': {'queue': 'high'},
+    # -- LOW PRIORITY QUEUE -- #
+    # 'myapp.tasks.close_session': {'queue': 'low'},
+}
 
 CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz']
 # Application definition
@@ -113,7 +129,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'')]
 
