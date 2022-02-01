@@ -530,6 +530,7 @@ li .description {
                     data: obj
                 }).done(function(response) {
 					$("#result_back").text(response);
+                    location.reload();
                 }).fail(function() {
 					alert("FAILED")
                 });
