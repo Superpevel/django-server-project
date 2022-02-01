@@ -9,8 +9,10 @@ def debug_task(self):
 class TestTask(celery.Task):
 
     def run(self):
-            sleep(10)
+            sleep(30)
             print("123")
 
 
 TestTask = app.register_task(TestTask())
+
+x = TestTask.delay()

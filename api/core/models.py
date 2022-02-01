@@ -24,3 +24,18 @@ class Film(models.Model):
         verbose_name = _('Фильм')
         verbose_name_plural = _('Фильмы')
 # Create your models here.
+class GreatQ(models.Model):
+
+    name = models.CharField(
+        _('Автор'),
+        max_length=255
+    )
+    quote  =  models.CharField(_('Описание'), blank=True,null=True,max_length=10000)
+    year  =  models.IntegerField(_('Год'), blank=True,null=True)
+
+    def __str__(self):
+        return f'{self.name}'
+
+    class Meta:
+        verbose_name = _('Цитата')
+        verbose_name_plural = _('Цитаты')
