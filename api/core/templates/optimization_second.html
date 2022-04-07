@@ -506,11 +506,9 @@ li .description {
 		<div>Параметр b:</div><input type="text" name="b" class="" style="width:50%;height: 50px;" id="b">
         <div>Параметр e:</div> <input type="text" name="e" class="" style="width:50%;height: 50px;" id="e">
         <div></div>
-		<label><input type="checkbox" name="raz" unchecked id="raz" />метод поразрядного поиска </label>
+		<label><input type="checkbox" name="dv" unchecked id="dv" />метод средней точки</label>
         <div></div>
-        <label><input type="checkbox" name="div" unchecked id="div"/>метод деления отрезка пополам</label>
-		<div></div>
-        <label><input type="checkbox" name="fib" unchecked id="fib"/>метод Фибоначчи</label>
+        <label><input type="checkbox" name="kas" unchecked id="kas"/>метод касательной</label>
 		<div class="hero">
 			<button class="button-9" role="button" type="button" id="back_end" style="margin-top: 5px">Получить результат</button>
 		</div>	
@@ -527,18 +525,15 @@ li .description {
                 'b': $('#b').val(),
                 'e': $('#e').val()
             };
-            if ($('#raz').is(':checked')) {
-                obj['method'] = 'raz'
+            if ($('#dv').is(':checked')) {
+                obj['method'] = 'dv'
             }
-            if ($('#div').is(':checked')) {
-                obj['method'] = 'div'
-            }
-            if ($('#fib').is(':checked')) {
-                obj['method'] = 'fib'
+            if ($('#kas').is(':checked')) {
+                obj['method'] = 'kas'
             }
 			obj['csrfmiddlewaretoken'] ='{{ csrf_token }}';
 			$.ajax({
-                    url: '{% url "raz_search" %}',
+                    url: '{% url "optimization_second_back" %}',
                     type: 'POST',
                     data: obj
                 }).done(function(response) {
