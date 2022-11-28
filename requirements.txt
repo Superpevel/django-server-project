@@ -13,4 +13,5 @@ selenium==4.1.0
 webdriver-manager
 python-dotenv==0.19.2
 celery==5.2.3
+openpyxl==3.0.10
 kombu
