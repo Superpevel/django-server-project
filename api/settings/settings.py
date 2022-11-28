@@ -45,7 +45,7 @@ CELERY_ROUTES = {
     # 'myapp.tasks.close_session': {'queue': 'low'},
 }
 
-CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz']
+CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz','http://www.sorrytd.xyz']
 # Application definition
 
 INSTALLED_APPS = [
