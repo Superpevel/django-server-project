@@ -15,6 +15,8 @@ from libs.div_search import dv_search
 from libs.fib_search import fib_search
 from libs.kas_search import solve_algo_kas
 from libs.sr_search import solve_algo_sr
+import openpyxl
+
 class QuotesView(ListView):
     model = GreatQ
     template_name  = "quotes.html"
@@ -65,8 +67,58 @@ class BackendRazSearch(APIView):
             print(f'{result} check this' )
             return Response({'result': result[0],'Iterations': result[2]})
 
+def fin_otchet(request):
+    logistics_list = []
+    sells_list = []
+    stats = {}
+    if request.method == 'POST':
+        excel_file = request.FILES["excel_file"]
+        wb = openpyxl.load_workbook(excel_file)
+    
+        worksheet = wb["Sheet1"]
+        print(worksheet)
+        excel_data = list()
+        # iterating over the rows and
+        # getting value from each cell in row
+        for row in worksheet.iter_rows(min_row=2):
+            row_data = list()
+            # article = row[3].value
+            row_data = {
+                'article': row[3].value,
+                'type': row[10].value,
+                'date': row[11].value,
+                'wb_price': row[15].value,
+                'selling_price': row[19].value,
+                'kvv': row[21].value,
+                'reward': row[29].value,
+                'logistics_amount': row[32].value,
+            }
+            if row_data['type'] == 'Логистика':
+                logistics_list.append(row_data)
+            else:
+                sells_list.append(row_data)
+        
+        for sell in sells_list:
+            if not stats.get(sell['article']):
+                stats[sell['article']] = {'sells': [sell] , 'avarage_price': sell['reward'], 'logistics_avarage': 0}
+            else:
+                # stats[sell['article']]['sells'].append(sell)
+                stats[sell['article']]['avarage_price'] = (stats[sell['article']]['avarage_price'] + sell['reward']) // 2
+        for log in logistics_list:
+            if not stats.get(log['article']):
+                stats[log['article']] = {'sells': [] , 'avarage_price': 0, 'logistics_avarage': log['logistics_amount']}
+            else:
+                stats[log['article']]['logistics_avarage'] = (stats[log['article']]['logistics_avarage'] + log['logistics_amount']) // 2 if stats[log['article']]['logistics_avarage'] else log['logistics_amount']
 
+        print(stats.keys())
+        # for sell in sells_list:
+        #     if not stats.get(sell['article']):
+        #         stats[sell['article']] = {}
+        # print(sells_list)
+        # print('-----------------------')
+        # print(logistics_list)
 
+    return render(request, "fin_otchet.html", {'sells': sells_list, 'logistics': logistics_list, 'stats': stats})
 
 def optimization_first(request):
 
