@@ -100,17 +100,17 @@ def fin_otchet(request):
         
         for sell in sells_list:
             if not stats.get(sell['article']):
-                stats[sell['article']] = {'sells': [sell] , 'avarage_price': sell['reward'], 'logistics_avarage': 0}
+                stats[sell['article']] = {'sells': [sell] , 'avarage_price': sell['reward'], 'logistics_avarage': 0, 'amount': 1}
             else:
                 # stats[sell['article']]['sells'].append(sell)
                 stats[sell['article']]['avarage_price'] = (stats[sell['article']]['avarage_price'] + sell['reward']) // 2
+                stats[sell['article']]['amount'] =  stats[sell['article']]['amount'] + 1
         for log in logistics_list:
             if not stats.get(log['article']):
-                stats[log['article']] = {'sells': [] , 'avarage_price': 0, 'logistics_avarage': log['logistics_amount']}
+                stats[log['article']] = {'sells': [] , 'avarage_price': 0, 'logistics_avarage': log['logistics_amount'], 'amount': 0}
             else:
                 stats[log['article']]['logistics_avarage'] = (stats[log['article']]['logistics_avarage'] + log['logistics_amount']) // 2 if stats[log['article']]['logistics_avarage'] else log['logistics_amount']
 
-        print(stats.keys())
         # for sell in sells_list:
         #     if not stats.get(sell['article']):
         #         stats[sell['article']] = {}

@@ -542,6 +542,9 @@ padding-right: 10px;
                         Средняя цена логистики
                     </td>
                     <td>
+                        Количетсво выкупов
+                    </td>
+                    <td>
                         Ссылка на вб
                     </td>
                 </tr>
@@ -556,6 +559,9 @@ padding-right: 10px;
                         </td>
                         <td>
                             {{value.logistics_avarage}}
+                        </td>
+                        <td>
+                            {{value.amount}}
                         </td>
                         <td>
                             <a href="https://www.wildberries.ru/catalog/{{key}}/detail.aspx?targetUrl=GP" target="_blank">Артикул на вб</a>
@@ -627,7 +633,7 @@ padding-right: 10px;
 	<div class="container">
         Финансовый отчет
         <br>
-        <form action='/fin_otchet' method="post" enctype="multipart/form-data">
+        <form action='/django/fin_otchet' method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="file"
                 title="Upload excel file"
