@@ -541,6 +541,9 @@ padding-right: 10px;
                     <td>
                         Средняя цена логистики
                     </td>
+                    <td>
+                        Ссылка на вб
+                    </td>
                 </tr>
 
                 {% for key, value in stats.items %}
@@ -553,6 +556,9 @@ padding-right: 10px;
                         </td>
                         <td>
                             {{value.logistics_avarage}}
+                        </td>
+                        <td>
+                            <a href="https://www.wildberries.ru/catalog/{{key}}/detail.aspx?targetUrl=GP" target="_blank">Артикул на вб</a>
                         </td>
                     </tr>
 
