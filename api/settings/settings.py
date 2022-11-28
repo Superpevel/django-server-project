@@ -43,8 +43,7 @@ CELERY_ROUTES = {
     # -- LOW PRIORITY QUEUE -- #
     # 'myapp.tasks.close_session': {'queue': 'low'},
 }
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz','http://www.sorrytd.xyz','www.sorrytd.xyz']
+CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz']
 # Application definition
 
 INSTALLED_APPS = [
