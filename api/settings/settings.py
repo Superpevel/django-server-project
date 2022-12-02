@@ -28,8 +28,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 USE_X_FORWARDED_HOST = True
-FORCE_SCRIPT_NAME = '/django/'
-SESSION_COOKIE_PATH = '/django/'
+FORCE_SCRIPT_NAME = '/'
+SESSION_COOKIE_PATH = '/'
 
 CELERY_BROKER= 'amqp://superpevel:jonin123@localhost:5672/'
 CELERY_QUEUES = (
