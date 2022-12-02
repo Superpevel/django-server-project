@@ -27,6 +27,8 @@ SECRET_KEY = 'django-insecure-ag5(t^hc(a$!i9eagcc&^8a^fn!&ps_1-g!_d%4x=20ug1!o$l
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+USE_X_FORWARDED_HOST = True
+FORCE_SCRIPT_NAME = '/django'
 
 CELERY_BROKER= 'amqp://superpevel:jonin123@localhost:5672/'
 CELERY_QUEUES = (
@@ -43,7 +45,7 @@ CELERY_ROUTES = {
     # -- LOW PRIORITY QUEUE -- #
     # 'myapp.tasks.close_session': {'queue': 'low'},
 }
-CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz','www.sorrytd.xyz','http://www.sorrytd.xyz']
+CSRF_TRUSTED_ORIGINS = ['http://51.250.6.54','http://127.0.0.1','http://sorrytd.xyz','http://www.sorrytd.xyz']
 # Application definition
 
 INSTALLED_APPS = [

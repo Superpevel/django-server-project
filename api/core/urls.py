@@ -14,5 +14,7 @@ urlpatterns = [
     path('optimization/second',views.optimization_second,name='optimiz_2'),
     path('optimization/second_back',views.BackendSecond.as_view(),name='optimization_second_back'),
     path('fin_otchet',views.fin_otchet,name='fin_otchet'),
+    path('fin_otchet/<int:id>', views.fin_detail, name = 'fin_detail'),
+    path('fin_otchet/<int:otchet_id>/<int:id>', views.FinOtchetRowsListView.as_view(), name = 'findetails')
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

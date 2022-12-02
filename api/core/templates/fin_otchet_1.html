@@ -533,6 +533,9 @@ padding-right: 10px;
             <tbody>
                 <tr>
                     <td>
+                        id
+                    </td>
+                    <td>
                         Артикул
                     </td>
                     <td>
@@ -542,112 +545,43 @@ padding-right: 10px;
                         Средняя цена логистики
                     </td>
                     <td>
+                        Общая цена логистики
+                    </td>
+                    <td>
                         Количетсво выкупов
                     </td>
                     <td>
                         Ссылка на вб
                     </td>
                 </tr>
-
-                {% for key, value in stats.items %}
+                {% for stat in stats%}
                     <tr>
                         <td>
-                            {{key}}
+                            <a href="{{id}}/{{stat.id}}">{{stat.id}}</a>
                         </td>
                         <td>
-                            {{value.avarage_price}}
+                            {{stat.article}}
                         </td>
                         <td>
-                            {{value.logistics_avarage}}
+                            {{stat.avarage_price}}
                         </td>
                         <td>
-                            {{value.amount}}
+                            {{stat.logistics_avarage}}
                         </td>
                         <td>
-                            <a href="https://www.wildberries.ru/catalog/{{key}}/detail.aspx?targetUrl=GP" target="_blank">Артикул на вб</a>
+                            {{stat.logistics_amount}}
+                        </td>
+                        <td>
+                            {{stat.buyout_amount}}
+                        </td>
+                        <td>
+                            <a href="https://www.wildberries.ru/catalog/{{key}}/detail.aspx?targetUrl=GP" target="_blank"> Артикул на вб</a>
                         </td>
                     </tr>
-
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
-	<div class="container">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>
-                        Артикул
-                    </td>
-                    <td>
-                        Цена на вб в момент продажи
-                    </td>
-                    <td>
-                        По какой цене продал вб
-                    </td>
-                    <td>
-                        К перечеслинию
-                    </td>
-                    <td>
-                        Коммисия в %
-                    </td>
-                    <td>
-                        Дата покупки
-                    </td>
-                    <td>
-                        Ссылка на Артикул
-                    </td>
-                </tr>
-
-                {% for sell in sells %}
-                    <tr>
-                        <td>
-                            {{sell.article}}
-                        </td>
-                        <td>
-                            {{sell.wb_price}}
-                        </td>
-                        <td>
-                            {{sell.selling_price}}
-                        </td>
-                        <td>
-                            {{sell.reward}}
-                        </td>
-                        <td>
-                            {{sell.kvv}}
-                        </td>
-                        <td>
-                            {{sell.date}}
-                        </td>
-                        <td>
-                            <a href="https://www.wildberries.ru/catalog/{{sell.article}}/detail.aspx?targetUrl=GP" target="_blank">Артикул на вб</a>
-                        </td>
-
-                    </tr>
-
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-	<div class="container">
-        Финансовый отчет
-        <br>
-        <form action='/fin_otchet' method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file"
-                title="Upload excel file"
-                name="excel_file"
-                style="border: 5px solid black; padding: 5px;"
-                required="required">
-            <p>
-            <input type="submit"
-                value="Отправить отчет"
-                class="button-9"
-                style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
-        </form>
-    </div>
-
 </body>
 <script>
  $('#back_end').click(function (e) {

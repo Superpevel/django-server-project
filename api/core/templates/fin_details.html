@@ -528,51 +528,6 @@ padding-right: 10px;
 		</div>       
 	</div>
 
-    <div class="container">
-        <table class="table">
-            <tbody>
-                <tr>
-                    <td>
-                        Артикул
-                    </td>
-                    <td>
-                        Средняя цена
-                    </td>
-                    <td>
-                        Средняя цена логистики
-                    </td>
-                    <td>
-                        Количетсво выкупов
-                    </td>
-                    <td>
-                        Ссылка на вб
-                    </td>
-                </tr>
-
-                {% for key, value in stats.items %}
-                    <tr>
-                        <td>
-                            {{key}}
-                        </td>
-                        <td>
-                            {{value.avarage_price}}
-                        </td>
-                        <td>
-                            {{value.logistics_avarage}}
-                        </td>
-                        <td>
-                            {{value.amount}}
-                        </td>
-                        <td>
-                            <a href="https://www.wildberries.ru/catalog/{{key}}/detail.aspx?targetUrl=GP" target="_blank">Артикул на вб</a>
-                        </td>
-                    </tr>
-
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
 	<div class="container">
         <table class="table">
             <tbody>
@@ -600,25 +555,25 @@ padding-right: 10px;
                     </td>
                 </tr>
 
-                {% for sell in sells %}
+                {% for row in object_list %}
                     <tr>
                         <td>
-                            {{sell.article}}
+                            {{row.article}}
                         </td>
                         <td>
-                            {{sell.wb_price}}
+                            {{row.wb_price}}
                         </td>
                         <td>
-                            {{sell.selling_price}}
+                            {{row.selling_price}}
                         </td>
                         <td>
-                            {{sell.reward}}
+                            {{row.reward}}
                         </td>
                         <td>
-                            {{sell.kvv}}
+                            {{row.kvv}}
                         </td>
                         <td>
-                            {{sell.date}}
+                            {{row.date}}
                         </td>
                         <td>
                             <a href="https://www.wildberries.ru/catalog/{{sell.article}}/detail.aspx?targetUrl=GP" target="_blank">Артикул на вб</a>
@@ -629,25 +584,20 @@ padding-right: 10px;
                 {% endfor %}
             </tbody>
         </table>
+        <div class="pagination">
+            <span class="page-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                {% endif %}
+                <span class="page-current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
-	<div class="container">
-        Финансовый отчет
-        <br>
-        <form action='/fin_otchet' method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file"
-                title="Upload excel file"
-                name="excel_file"
-                style="border: 5px solid black; padding: 5px;"
-                required="required">
-            <p>
-            <input type="submit"
-                value="Отправить отчет"
-                class="button-9"
-                style="border: 1px solid green; padding:5px; border-radius: 2px; cursor: pointer;">
-        </form>
-    </div>
-
 </body>
 <script>
  $('#back_end').click(function (e) {
