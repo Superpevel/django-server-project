@@ -27,9 +27,6 @@ SECRET_KEY = 'django-insecure-ag5(t^hc(a$!i9eagcc&^8a^fn!&ps_1-g!_d%4x=20ug1!o$l
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-USE_X_FORWARDED_HOST = True
-FORCE_SCRIPT_NAME = '/'
-SESSION_COOKIE_PATH = '/'
 
 CELERY_BROKER= 'amqp://superpevel:jonin123@localhost:5672/'
 CELERY_QUEUES = (
